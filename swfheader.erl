@@ -40,7 +40,7 @@ parse(Filename) ->
 parse_signature(<<"FWS", Version:8, Size:32/little, Data/binary>>) ->
     {uncompressed, Version, Size, Data};
 parse_signature(<<"CWS", Version:8, Size:32/little, Data/binary>>) ->
-    {compressed, Version, Size, zlib:gunzip(Data)}.
+    {compressed, Version, Size, zlib:uncompress(Data)}.
 
 parse_payload(Payload) ->
     % Extract the RECT field size
